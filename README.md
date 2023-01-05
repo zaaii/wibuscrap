@@ -24,13 +24,13 @@ npm run start
 - Note that this scraper is deployed on a `free Render service`, so `some features may not work properly` and, it maybe `out of quota` sometimes.
 
 #### 1. Anoboy
-  - [Get Latest Animes](https://weeb-scraper.onrender.com/api/anoboy)
+  - [Get Latest Animes](https://wibuscrap.vercel.app/api/anoboy)
   ```
-  https://weeb-scraper.onrender.com/api/anoboy
+  https://wibuscrap.vercel.app/api/anoboy
   ```
-  - [Search Certain Anime](https://weeb-scraper.onrender.com/api/anoboy?s=kaguya)
+  - [Search Certain Anime](https://wibuscrap.vercel.app/api/anoboy?s=bocchi)
   ```
-  https://weeb-scraper.onrender.com/api/anoboy?s=kaguya
+  https://wibuscrap.vercel.app/api/anoboy?s=bocchi
   ```
   - [Get Anime Detail as well as the stream link](https://weeb-scraper.onrender.com/api/anoboy/2022~12~bleach-sennen-kessen-hen-episode-9~)
   ```
@@ -47,3 +47,7 @@ npm run start
   ```
   https://weeb-scraper.onrender.com/api/komiku?s=Kaguya
   ```
+
+-------
+by : https://github.com/fahmih6/Weebs_Scraper
+-------
