@@ -17,6 +17,9 @@ app.use("/api/komiku/", require("./routes/komiku-route.js"));
 /// Use Anoboy route
 app.use("/api/anoboy/", require("./routes/anoboy-route.js"));
 
+// Use Otakudesu route
+app.use("/api/otakudesu/", require("./routes/otakudesu-route.js"));
+
 /// Use Dorama route
 app.use("/api/dorama/", require("./routes/dorama-route.js"));
 
