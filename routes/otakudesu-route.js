@@ -21,7 +21,7 @@ const Services = require("../services/otakudesu-services")
 
 
 // Get Ongoing Anime -Done-
-router.get("/api/otakudesu/ongoing/:page", (req, res) => Services.getOngoingAnime(req, res));
+router.get("/ongoing/:page", (req, res) => Services.getOngoingAnime(req, res));
 // Get Completed Anime -Done-
 router.get("/api/otakudesu/completed/:page", Services.getCompleted)
 // Get Search Anime -Done-
