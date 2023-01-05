@@ -29,7 +29,7 @@ module.exports.getDorama = async (req, res) => {
             .find("h2")
             .find("a")
             .attr("href")
-            .replace(`${process.env.DORAMAINDO_LINK}`, `${url}`)
+            .replace(`${process.env.DORAMAINDO_LINK}/`, `${url}`)
             .replaceAll(`-`, `~`);
 
           const thumbnail = $(el)

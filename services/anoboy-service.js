@@ -96,18 +96,13 @@ module.exports.getLatestAnime = async (req, res) => {
     },
   });
 
+  //add search
   if (keyword) {
-    if (page == 1) {
-      c.queue(`${process.env.ANOBOY_LINK}/?s=${keyword}`);
-    } else {
-      c.queue(`${process.env.ANOBOY_LINK}/page/${page}/?s=${keyword}`);
-    }
-  } else {
-    if (page == 1) {
-      c.queue(`${process.env.ANOBOY_LINK}/`);
-    } else {
-      c.queue(`${process.env.ANOBOY_LINK}/page/${page}/`);
-    }
+    c.queue(`${process.env.ANOBOY_LINK}/?s=${keyword}&paged=${page}`);
+  }
+  //add page
+  else {
+    c.queue(`${process.env.ANOBOY_LINK}/page/${page}`);
   }
 };
 
