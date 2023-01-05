@@ -3,7 +3,7 @@ const route = router
 const Services = require("../services/otakudesu-services")
 
 
-route.get("/", (req, res) => {
+route.get("/api/otakudesu/", (req, res) => {
     res.send({
         endpoint: {
             getOngoingAnime: "/api/otakudesu/ongoing/:page",
