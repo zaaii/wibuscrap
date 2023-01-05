@@ -6,7 +6,7 @@ const Services = require("../services/otakudesu-services")
 route.get("/", (req, res) => {
     res.send({
         endpoint: {
-            getOngoingAnime: "/api/otakudesu/ongoing/:page",
+            getOngoingAnime: "/ongoing/:page",
             getCompletedAnime: "/api/otakudesu/completed/:page",
             getAnimeSearch: "/api/otakudesu/search/:q",
             getAnimeList: "/api/otakudesu/anime-list",
