@@ -1,6 +1,6 @@
-# Weebs Scraper
+# Wibu Scrapper
 
-Web scraper for Anoboy, Doramaindo, Komiku, and Komikcast. Build using Node JS.
+Web scraper for Anoboy, Otakudesu, Doramaindo, Komiku, 
 
 # Getting Started
 
@@ -32,22 +32,23 @@ npm run start
   ```
   https://wibuscrap.vercel.app/api/anoboy?s=bocchi
   ```
-  - [Get Anime Detail as well as the stream link](https://weeb-scraper.onrender.com/api/anoboy/2022~12~bleach-sennen-kessen-hen-episode-9~)
+  - [Get Anime Detail as well as the stream link](https://wibuscrap.vercel.app/api/anoboy/2022~12~bleach-sennen-kessen-hen-episode-9~)
   ```
-  https://weeb-scraper.onrender.com/api/anoboy/2022~12~bleach-sennen-kessen-hen-episode-9~
+  https://wibuscrap.vercel.app/api/anoboy/2022~12~bleach-sennen-kessen-hen-episode-9~
   ```
   
   
 #### 2. Komiku
-  - [Get Latest Mangas](https://weeb-scraper.onrender.com/api/komiku)
+  - [Get Latest Mangas](https://wibuscrap.vercel.app/api/komiku)
   ```
-  https://weeb-scraper.onrender.com/api/komiku
+  https://wibuscrap.vercel.app/api/komiku
   ```
   - [Search Certain Manga](https://weeb-scraper.onrender.com/api/komiku?s=Kaguya)
   ```
-  https://weeb-scraper.onrender.com/api/komiku?s=Kaguya
+  https://wibuscrap.vercel.app/api/komiku?s=Kaguya
   ```
 
--------
-by : https://github.com/fahmih6/Weebs_Scraper
--------
+-----
+Thanks To
+- https://github.com/devmoeid/api-otakudesu
+- https://github.com/fahmih6/Weebs_Scraper
