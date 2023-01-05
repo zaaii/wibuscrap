@@ -3,25 +3,25 @@ const route = router
 const Services = require("../services/otakudesu-services")
 
 
-// route.get("/api/", (req, res) => {
-//     res.send({
-//         endpoint: {
-//             getOngoingAnime: "/api/otakudesu/ongoing/:page",
-//             getCompletedAnime: "/api/otakudesu/completed/:page",
-//             getAnimeSearch: "/api/otakudesu/search/:q",
-//             getAnimeList: "/api/otakudesu/anime-list",
-//             getAnimeDetail: "/api/otakudesu/detail/:endpoint",
-//             getAnimeEpisode: "/api/otakudesu/episode/:endpoint",
-//             getBatchLink: "/api/otakudesu/batch/:endpoint",
-//             getGenreList: "/api/otakudesu/genres",
-//             getGenrePage: "/api/otakudesu/genres/:genre/:page"
-//         }
-//     })
-// })
+route.get("/", (req, res) => {
+    res.send({
+        endpoint: {
+            getOngoingAnime: "/api/otakudesu/ongoing/:page",
+            getCompletedAnime: "/api/otakudesu/completed/:page",
+            getAnimeSearch: "/api/otakudesu/search/:q",
+            getAnimeList: "/api/otakudesu/anime-list",
+            getAnimeDetail: "/api/otakudesu/detail/:endpoint",
+            getAnimeEpisode: "/api/otakudesu/episode/:endpoint",
+            getBatchLink: "/api/otakudesu/batch/:endpoint",
+            getGenreList: "/api/otakudesu/genres",
+            getGenrePage: "/api/otakudesu/genres/:genre/:page"
+        }
+    })
+})
 
 
 // Get Ongoing Anime -Done-
-router.get("/ongoing/:page", (req, res) => Services.getOngoingAnime(req, res));
+router.get("/ongoing/:page", Services.getOngoing)
 // Get Completed Anime -Done-
 router.get("/api/otakudesu/completed/:page", Services.getCompleted)
 // Get Search Anime -Done-
