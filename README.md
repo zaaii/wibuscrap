@@ -14,14 +14,11 @@ DORAMAINDO_LINK="Masukkan Link DoramaIndo Disini"
 
   3. Jalankan `npm install` di command prompt kalian.
 
-  4. Lalu jalankan.
-```
-npm run start
-```
+  4. Lalu jalankan `npm run start`
 
 ## 📖 Documentation
 
-**Silahkan Baca disini:** https://github.com/zaaii/wibuscrap/wiki/Docs
+**Silahkan Baca disini:** https://github.com/zaaii/wibuscrap/wiki/
 
 
 ## 🙏Thanks To
