@@ -8,7 +8,7 @@ module.exports.getLatestManga = async (req, res) => {
   var c = new Crawler({
     rateLimit: 1000,
     maxConnections: 1,
-    referer: "https://komikcast.com/",
+    referer: "https://komikcast.site/",
     // This will be called for each crawled page
     callback: function (error, result, done) {
       const mangaList = [];
@@ -73,10 +73,10 @@ module.exports.getLatestManga = async (req, res) => {
   });
 
   if (keyword) {
-    c.queue(`https://komikcast.com/page/${page}/?s=${keyword}`);
+    c.queue(`https://komikcast.site/page/${page}/?s=${keyword}`);
   } else {
     c.queue(
-      `https://komikcast.com/daftar-komik/page/${page}/?sortby=update&type=manga`
+      `https://komikcast.site/daftar-komik/page/${page}/?sortby=update&type=manga`
     );
   }
 };
@@ -87,7 +87,7 @@ module.exports.getMangaByParam = async (req, res) => {
 
   const c = new Crawler({
     maxConnections: 16,
-    referer: "https://komikcast.com/",
+    referer: "https://komikcast.site/",
     // This will be called for each crawled page
     callback: (error, result, done) => {
       if (error) {
@@ -158,7 +158,7 @@ module.exports.getMangaByParam = async (req, res) => {
     },
   });
 
-  c.queue(`https://komikcast.com/manga/${param}`);
+  c.queue(`https://komikcast.site/manga/${param}`);
 };
 
 module.exports.getMangaChapterByParam = async (req, res) => {
@@ -167,7 +167,7 @@ module.exports.getMangaChapterByParam = async (req, res) => {
 
   const c = new Crawler({
     maxConnections: 16,
-    referer: "https://komikcast.com/",
+    referer: "https://komikcast.site/",
     // This will be called for each crawled page
     callback: (error, result, done) => {
       if (error) {
@@ -196,5 +196,5 @@ module.exports.getMangaChapterByParam = async (req, res) => {
     },
   });
 
-  c.queue(`https://komikcast.com/chapter/${param}`);
+  c.queue(`https://komikcast.site/chapter/${param}`);
 };

@@ -26,8 +26,5 @@ app.use("/api/dorama/", require("./routes/dorama-route.js"));
 /// Use Komikcast route
 app.use("/api/komikcast/", require("./routes/manga-route.js"));
 
-/// Use Anoboy V2 route
-app.use("/api/v2/anoboy/", require("./routes/anoboy-route-v2.js"));
-
 /// Listen to certain port
 app.listen(port, () => console.log(`server running on port ${port}`));
