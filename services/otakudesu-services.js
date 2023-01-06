@@ -6,7 +6,7 @@ const episodeHelper = require("../helper/episodeHelper")
 const Services = {
     getOngoing: async (req, res) => {
         const page = req.params.page
-        let url = page === 1 ? "https://otakudesu.bid/ongoing-anime/" : `https://otakudesu.bid/ongoing-anime/page/${page}/`
+        let url = page === 1 ? `${process.env.OTAKUDESU_LINK}` + 'ongoing-anime/' : `${process.env.OTAKUDESU_LINK}` + `ongoing-anime/page/${page}/`
         try {
             const response = await services.fetchService(url, res)
             if (response.status === 200) {
@@ -54,7 +54,7 @@ const Services = {
     },
     getCompleted: async (req, res) => {
         const page = req.params.page
-        let url = page === 1 ? "https://otakudesu.bid/complete-anime/" : `https://otakudesu.bid/complete-anime/page/${page}/`
+        let url = page === 1 ? `${process.env.OTAKUDESU_LINK}` + "complete-anime/" : `${process.env.OTAKUDESU_LINK}` + `complete-anime/page/${page}/`
     
         try {
             const response = await services.fetchService(url, res)
@@ -104,7 +104,7 @@ const Services = {
     },
     getSearch: async (req, res) => {
         const query = req.params.q
-        let url = `https://otakudesu.bid/?s=${query}&post_type=anime`
+        let url = `${process.env.OTAKUDESU_LINK}` + `?s=${query}&post_type=anime`
         try {
             const response = await services.fetchService(url, res)
             if (response.status === 200) {
@@ -151,7 +151,7 @@ const Services = {
         }
     },
     getAnimeList: async (req, res) => {
-        let url = "https://otakudesu.bid/anime-list-2/"
+        let url = `${process.env.OTAKUDESU_LINK}` + "anime-list-2/"
         try {
             const response = await services.fetchService(url, res)
             if (response.status === 200) {
@@ -194,7 +194,7 @@ const Services = {
     },
     getAnimeDetail: async (req, res) => {
         const endpoint = req.params.endpoint
-        let url = `https://otakudesu.bid/anime/${endpoint}/`
+        let url = `${process.env.OTAKUDESU_LINK}anime/${endpoint}/`
     
         try {
             const response = await services.fetchService(url, res)
@@ -260,7 +260,7 @@ const Services = {
     },
     getAnimeEpisode: async (req, res) => {
         const endpoint = req.params.endpoint;
-        const url = `${baseUrl}/episode/${endpoint}`;
+        const url = `${process.env.OTAKUDESU_LINK}episode/${endpoint}`;
         try {
             const response = await services.fetchService(url, res);
             const $ = cheerio.load(response.data);
@@ -274,7 +274,7 @@ const Services = {
             let link_ref, title_ref
             $(".flir > a").each((index, el) => {
                 title_ref = $(el).text()
-                link_ref = $(el).attr("href").replace("https://otakudesu.bid/anime/", "").replace("https://otakudesu.bid/episode/", "").replace("/", "")
+                link_ref = $(el).attr("href").replace(`${process.env.OTAKUDESU_LINK}` + "anime/", "").replace(`${process.env.OTAKUDESU_LINK}` + "episode/", "").replace("/", "")
     
                 obj.relative.push({
                     title_ref,
@@ -285,7 +285,7 @@ const Services = {
             let list_episode_title, list_episode_endpoint
             $("#selectcog > option").each((index, el) => {
                 list_episode_title = $(el).text()
-                list_episode_endpoint = $(el).attr("value").replace("https://otakudesu.bid/episode/", "").replace("/", "")
+                list_episode_endpoint = $(el).attr("value").replace(`${process.env.OTAKUDESU_LINK}` + "episode/", "").replace("/", "")
                 obj.list_episode.push({
                     list_episode_title,
                     list_episode_endpoint
@@ -350,7 +350,7 @@ const Services = {
     },
     getBatchLink: async (req, res) => {
         const endpoint = req.params.endpoint;
-        const fullUrl = `${baseUrl}/batch/${endpoint}`;
+        const fullUrl = `${process.env.OTAKUDESU_LINK}batch/${endpoint}`;
         console.log(fullUrl);
         try {
             const response = await services.fetchService(fullUrl, res)
@@ -373,7 +373,7 @@ const Services = {
         }
     },
     getGenreList: async (req, res) => {
-        const url = `${baseUrl}/genre-list/`
+        const url = `${process.env.OTAKUDESU_LINK}genre-list/`
         try {
             const response = await services.fetchService(url, res)
             if (response.status === 200) {
@@ -410,7 +410,7 @@ const Services = {
     getGenrePage: async (req, res) => {
         const genre = req.params.genre
         const page = req.params.page
-        const url = page === 1 ? `https://otakudesu.bid/genres/${genre}` : `https://otakudesu.bid/genres/${genre}/page/${page}`
+        const url = page === 1 ? `${process.env.OTAKUDESU_LINK}genres/${genre}` : `${process.env.OTAKUDESU_LINK}genres/${genre}/page/${page}`
         
         try {
             const response = await services.fetchService(url, res)
@@ -420,7 +420,7 @@ const Services = {
                 let genreAnime = [], title, link, studio, episode, rating, thumb, season, sinopsis, genre
                 $('.col-anime-con').each((index, el) => {
                     title = $(el).find(".col-anime-title > a").text()
-                    link = $(el).find(".col-anime-title > a").attr("href").replace("https://otakudesu.bid/anime/", "")
+                    link = $(el).find(".col-anime-title > a").attr("href").replace(`${process.env.OTAKUDESU_LINK}` + "anime/", "")
                     studio = $(el).find(".col-anime-studio").text()
                     episode = $(el).find(".col-anime-eps").text()
                     rating = $(el).find(".col-anime-rating").text() || null
