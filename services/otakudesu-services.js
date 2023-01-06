@@ -6,7 +6,7 @@ const episodeHelper = require("../helper/episodeHelper")
 const Services = {
     getOngoing: async (req, res) => {
         const page = req.params.page
-        let url = page === 1 ? `${process.env.OTAKUDESU_LINK}` + 'ongoing-anime/' : `${process.env.OTAKUDESU_LINK}` + `ongoing-anime/page/${page}/`
+        let url = page === 1 ? `${process.env.OTAKUDESU_LINK}ongoing-anime/` : `${process.env.OTAKUDESU_LINK}ongoing-anime/page/${page}/`
         try {
             const response = await services.fetchService(url, res)
             if (response.status === 200) {
