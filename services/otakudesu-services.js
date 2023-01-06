@@ -54,7 +54,7 @@ const Services = {
     },
     getCompleted: async (req, res) => {
         const page = req.params.page
-        let url = page === 1 ? `${process.env.OTAKUDESU_LINK}` + "complete-anime/" : `${process.env.OTAKUDESU_LINK}` + `complete-anime/page/${page}/`
+        let url = page === 1 ? `${process.env.OTAKUDESU_LINK}complete-anime/` : `${process.env.OTAKUDESU_LINK}complete-anime/page/${page}/`
     
         try {
             const response = await services.fetchService(url, res)
@@ -104,7 +104,7 @@ const Services = {
     },
     getSearch: async (req, res) => {
         const query = req.params.q
-        let url = `${process.env.OTAKUDESU_LINK}` + `?s=${query}&post_type=anime`
+        let url = `${process.env.OTAKUDESU_LINK}?s=${query}&post_type=anime`
         try {
             const response = await services.fetchService(url, res)
             if (response.status === 200) {
@@ -151,7 +151,7 @@ const Services = {
         }
     },
     getAnimeList: async (req, res) => {
-        let url = `${process.env.OTAKUDESU_LINK}` + "anime-list-2/"
+        let url = `${process.env.OTAKUDESU_LINK}anime-list-2/`
         try {
             const response = await services.fetchService(url, res)
             if (response.status === 200) {
@@ -274,7 +274,7 @@ const Services = {
             let link_ref, title_ref
             $(".flir > a").each((index, el) => {
                 title_ref = $(el).text()
-                link_ref = $(el).attr("href").replace(`${process.env.OTAKUDESU_LINK}` + "anime/", "").replace(`${process.env.OTAKUDESU_LINK}` + "episode/", "").replace("/", "")
+                link_ref = $(el).attr("href").replace(`${process.env.OTAKUDESU_LINK}anime/`, "").replace(`${process.env.OTAKUDESU_LINK}episode/`, "").replace("/", "")
     
                 obj.relative.push({
                     title_ref,
@@ -294,13 +294,13 @@ const Services = {
             obj.list_episode.shift()
             const streamLinkResponse = streamElement.find("iframe").attr("src");
             obj.link_stream_response = await episodeHelper.get(streamLinkResponse);
-            // const stream$ = cheerio.load(streamLinkResponse.data)
-            // const sl = stream$('body').find('script').html().search('sources')
-            // const endIndex = stream$('body').find('script').eq(0).html().indexOf('}]',sl)
-            // const val = stream$('body').find('script').eq(0).html().substr(sl,endIndex - sl+1).replace(`sources: [{'file':'`,'')
-            // console.log(val);
-            // console.log(val.replace(`','type':'video/mp4'}`,''));
-            // obj.link_stream = await episodeHelper.get(streamLink);
+            const stream$ = cheerio.load(streamLinkResponse.data)
+            const sl = stream$('body').find('script').html().search('sources')
+            const endIndex = stream$('body').find('script').eq(0).html().indexOf('}]',sl)
+            const val = stream$('body').find('script').eq(0).html().substr(sl,endIndex - sl+1).replace(`sources: [{'file':'`,'')
+            console.log(val);
+            console.log(val.replace(`','type':'video/mp4'}`,''));
+            obj.link_stream = await episodeHelper.get(streamLink);
             console.log($('#pembed > div > iframe').attr('src'));
             let low_quality;
             let medium_quality;
@@ -420,7 +420,7 @@ const Services = {
                 let genreAnime = [], title, link, studio, episode, rating, thumb, season, sinopsis, genre
                 $('.col-anime-con').each((index, el) => {
                     title = $(el).find(".col-anime-title > a").text()
-                    link = $(el).find(".col-anime-title > a").attr("href").replace(`${process.env.OTAKUDESU_LINK}` + "anime/", "")
+                    link = $(el).find(".col-anime-title > a").attr("href").replace(`${process.env.OTAKUDESU_LINK}anime/`, "")
                     studio = $(el).find(".col-anime-studio").text()
                     episode = $(el).find(".col-anime-eps").text()
                     rating = $(el).find(".col-anime-rating").text() || null
