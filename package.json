@@ -1,12 +1,12 @@
 {
-  "name": "weebs-scraper",
+  "name": "wibu-scrapper",
   "version": "1.0.0",
   "description": "",
-  "main": "nodemon weebs-api-index.js",
+  "main": "nodemon index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon weebs-api-index.js",
-    "start": "node weebs-api-index.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
