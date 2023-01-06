@@ -11,6 +11,25 @@ app.use(morgan("dev"));
 
 app.use(express.json());
 
+app.get("/", (req, res) => {
+    res.status(200).json({
+      api_name: "Wibu Scrapper",
+      end_points: {
+        "/api/anoboy": "Mendapatkan data dari website Anoboy",
+        "/api/otakudesu": "Mendapatkan data dari website otakudesu",
+        "/api/dorama": "Mendapatkan data dari website doramaindo",
+        "/api/komikcast": "Mendapatkan data dari website komikcast",
+        "/api/komiku": "Mendapatkan data dari website komiku",
+      },
+      repository: "https://github.com/zaaii/wibuscrap",
+      social: {
+        github: "https://github.com/zaaii",
+        twitter: "https://twitter.com/iyazaii",
+      },
+    });
+  });
+  
+
 /// Use Komiku route
 app.use("/api/komiku/", require("./routes/komiku-route.js"));
 
