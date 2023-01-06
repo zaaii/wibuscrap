@@ -10,6 +10,7 @@ Web scrapper dari **Otakudesu, Anoboy, DoramaIndo, Komiku**
 ```
 ANOBOY_LINK="Masukkan Link Anoboy Disini"
 DORAMAINDO_LINK="Masukkan Link DoramaIndo Disini"
+OTAKUDESU_LINK="Masukkan Link Otakudesu Disini"
 ```
 
   3. Jalankan `npm install` di command prompt kalian.

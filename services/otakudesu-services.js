@@ -21,7 +21,7 @@ const Services = {
                     total_episode = $(el).find(".epz").text()
                     updated_on = $(el).find(".newnime").text()
                     updated_day = $(el).find(".epztipe").text()
-                    endpoint = $(el).find(".thumb > a").attr("href").replace(`${baseUrl}/anime/`, "").replace("/", "")
+                    endpoint = $(el).find(".thumb > a").attr("href").replace(`${process.env.OTAKUDESU_LINK}anime/`, "").replace("/", "")
     
                     ongoing.push({
                         title,
@@ -70,7 +70,7 @@ const Services = {
                     total_episode = $(el).find(".epz").text()
                     updated_on = $(el).find(".newnime").text()
                     score = $(el).find(".epztipe").text().trim()
-                    endpoint = $(el).find(".thumb > a").attr("href").replace(`${baseUrl}/anime/`, "").replace("/", "")
+                    endpoint = $(el).find(".thumb > a").attr("href").replace(`${process.env.OTAKUDESU_LINK}anime/`, "").replace("/", "")
     
                     completed.push({
                         title,
@@ -119,7 +119,7 @@ const Services = {
                     genres = $(el).find(".set > a").text().match(/[A-Z][a-z]+/g)
                     status = $(el).find(".set").text().match("Ongoing") || $(el).find(".set").text().match("Completed")
                     rating = $(el).find(".set").text().replace(/^\D+/g, '') || null
-                    endpoint = $(el).find("h2 > a").attr("href").replace(`${baseUrl}/anime/`, "").replace("/", "")
+                    endpoint = $(el).find("h2 > a").attr("href").replace(`${process.env.OTAKUDESU_LINK}anime/`, "").replace("/", "")
     
                     search.push({
                         title,
@@ -225,7 +225,7 @@ const Services = {
     
                 episodeElement.find("li").each((index, el) => {
                     episode_title = $(el).find("span > a").text()
-                    episode_endpoint = $(el).find("span > a").attr("href").replace(`${baseUrl}/episode/`, "").replace(`${baseUrl}/batch/`, "").replace(`${baseUrl}/lengkap/`, "").replace("/", "")
+                    episode_endpoint = $(el).find("span > a").attr("href").replace(`${process.env.OTAKUDESU_LINK}episode/`, "").replace(`${process.env.OTAKUDESU_LINK}batch/`, "").replace(`${process.env.OTAKUDESU_LINK}lengkap/`, "").replace("/", "")
                     episode_date = $(el).find(".zeebr").text()
     
                     episode_list.push({
@@ -285,7 +285,7 @@ const Services = {
             let list_episode_title, list_episode_endpoint
             $("#selectcog > option").each((index, el) => {
                 list_episode_title = $(el).text()
-                list_episode_endpoint = $(el).attr("value").replace(`${process.env.OTAKUDESU_LINK}` + "episode/", "").replace("/", "")
+                list_episode_endpoint = $(el).attr("value").replace(`${process.env.OTAKUDESU_LINK}episode/`, "").replace("/", "")
                 obj.list_episode.push({
                     list_episode_title,
                     list_episode_endpoint
@@ -294,13 +294,13 @@ const Services = {
             obj.list_episode.shift()
             const streamLinkResponse = streamElement.find("iframe").attr("src");
             obj.link_stream_response = await episodeHelper.get(streamLinkResponse);
-            const stream$ = cheerio.load(streamLinkResponse.data)
-            const sl = stream$('body').find('script').html().search('sources')
-            const endIndex = stream$('body').find('script').eq(0).html().indexOf('}]',sl)
-            const val = stream$('body').find('script').eq(0).html().substr(sl,endIndex - sl+1).replace(`sources: [{'file':'`,'')
-            console.log(val);
-            console.log(val.replace(`','type':'video/mp4'}`,''));
-            obj.link_stream = await episodeHelper.get(streamLink);
+            // const stream$ = cheerio.load(streamLinkResponse.data)
+            // const sl = stream$('body').find('script').html().search('sources')
+            // const endIndex = stream$('body').find('script').eq(0).html().indexOf('}]',sl)
+            // const val = stream$('body').find('script').eq(0).html().substr(sl,endIndex - sl+1).replace(`sources: [{'file':'`,'')
+            // console.log(val);
+            // console.log(val.replace(`','type':'video/mp4'}`,''));
+            // obj.link_stream = await episodeHelper.get(streamLink);
             console.log($('#pembed > div > iframe').attr('src'));
             let low_quality;
             let medium_quality;
