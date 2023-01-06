@@ -8,7 +8,7 @@ module.exports.getLatestManga = async (req, res) => {
   var c = new Crawler({
     rateLimit: 1000,
     maxConnections: 1,
-    referer: `${process.env.KOMIKCAST_LINK}`,
+    referer: "https://komikcast.site/",
     // This will be called for each crawled page
     callback: function (error, result, done) {
       const mangaList = [];
@@ -87,7 +87,7 @@ module.exports.getMangaByParam = async (req, res) => {
 
   const c = new Crawler({
     maxConnections: 16,
-    referer: `${process.env.KOMIKCAST_LINK}`,
+    referer: "https://komikcast.site/",
     // This will be called for each crawled page
     callback: (error, result, done) => {
       if (error) {
