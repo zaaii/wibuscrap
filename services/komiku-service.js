@@ -1,4 +1,3 @@
-// @ts-nocheck
 const Crawler = require("crawler");
 
 module.exports.getLatestManga = async (req, res) => {
@@ -9,7 +8,7 @@ module.exports.getLatestManga = async (req, res) => {
   var c = new Crawler({
     rateLimit: 1000,
     maxConnections: 1,
-    referer: "https://komiku.id/",
+    referer: `${process.env.KOMIKU_LINK}`,
     // This will be called for each crawled page
     callback: function (error, result, done) {
       const mangaList = [];
@@ -121,16 +120,16 @@ module.exports.getLatestManga = async (req, res) => {
 
   if (keyword) {
     if (page === 1) {
-      c.queue(`https://data.komiku.id/cari/?post_type=manga&s=${keyword}`);
+      c.queue(`${process.env.KOMIKU_LINK}cari/?post_type=manga&s=${keyword}`);
     } else {
       c.queue(
-        `https://data.komiku.id/page/${page}/?post_type=manga&s=${keyword}`
+        `${process.env.KOMIKU_LINK}page/${page}/?post_type=manga&s=${keyword}`
       );
     }
   } else if (page === 1) {
-    c.queue(`https://data.komiku.id/other/rekomendasi/`);
+    c.queue(`${process.env.KOMIKU_LINK}other/rekomendasi/`);
   } else {
-    c.queue(`https://data.komiku.id/other/rekomendasi/page/${page}/`);
+    c.queue(`${process.env.KOMIKU_LINK}other/rekomendasi/page/${page}/`);
   }
 };
 
@@ -140,7 +139,7 @@ module.exports.getMangaByParam = async (req, res) => {
 
   const c = new Crawler({
     maxConnections: 16,
-    referer: "https://komiku.id/",
+    referer: `${process.env.KOMIKU_LINK}`,
     // This will be called for each crawled page
     callback: (error, result, done) => {
       if (error) {
@@ -201,7 +200,7 @@ module.exports.getMangaByParam = async (req, res) => {
     },
   });
 
-  c.queue(`https://komiku.id/manga/${param}`);
+  c.queue(`${process.env.KOMIKU_LINK}manga/${param}`);
 };
 
 module.exports.getMangaChapterByParam = async (req, res) => {
@@ -210,7 +209,7 @@ module.exports.getMangaChapterByParam = async (req, res) => {
 
   const c = new Crawler({
     maxConnections: 16,
-    referer: "https://komiku.id/",
+    referer: `${process.env.KOMIKU_LINK}`,
     // This will be called for each crawled page
     callback: (error, result, done) => {
       if (error) {
@@ -240,5 +239,5 @@ module.exports.getMangaChapterByParam = async (req, res) => {
     },
   });
 
-  c.queue(`https://komiku.id/ch/${param}`);
+  c.queue(`${process.env.KOMIKU_LINK}ch/${param}`);
 };

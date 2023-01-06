@@ -1,6 +1,5 @@
 const services = require("../helper/services")
 const cheerio = require("cheerio")
-const baseUrl = require("../const/url")
 const episodeHelper = require("../helper/episodeHelper")
 
 const Services = {
