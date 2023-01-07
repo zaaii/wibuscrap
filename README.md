@@ -12,7 +12,6 @@ ANOBOY_LINK="Masukkan Link Anoboy Disini"
 DORAMAINDO_LINK="Masukkan Link DoramaIndo Disini"
 OTAKUDESU_LINK="Masukkan Link Otakudesu Disini"
 KOMICAST_LINK="Masukkan Link KomiCast Disini"
-KOMIKU_LINK="Masukkan Link Komiku Disini"
 ```
 
   3. Jalankan `npm install` di command prompt kalian.
