@@ -1,3 +1,4 @@
+// @ts-nocheck
 const Crawler = require("crawler");
 
 module.exports.getLatestManga = async (req, res) => {
@@ -120,16 +121,16 @@ module.exports.getLatestManga = async (req, res) => {
 
   if (keyword) {
     if (page === 1) {
-      c.queue(`${process.env.KOMIKU_LINK}cari/?post_type=manga&s=${keyword}`);
+      c.queue(`https://data.komiku.id/cari/?post_type=manga&s=${keyword}`);
     } else {
       c.queue(
-        `${process.env.KOMIKU_LINK}page/${page}/?post_type=manga&s=${keyword}`
+        `https://data.komiku.id/page/${page}/?post_type=manga&s=${keyword}`
       );
     }
   } else if (page === 1) {
-    c.queue(`${process.env.KOMIKU_LINK}other/rekomendasi/`);
+    c.queue(`https://data.komiku.id/other/rekomendasi/`);
   } else {
-    c.queue(`${process.env.KOMIKU_LINK}other/rekomendasi/page/${page}/`);
+    c.queue(`https://data.komiku.id/other/rekomendasi/page/${page}/`);
   }
 };
 
@@ -200,7 +201,7 @@ module.exports.getMangaByParam = async (req, res) => {
     },
   });
 
-  c.queue(`${process.env.KOMIKU_LINK}manga/${param}`);
+  c.queue(`https://komiku.id/manga/${param}`);
 };
 
 module.exports.getMangaChapterByParam = async (req, res) => {
@@ -239,5 +240,5 @@ module.exports.getMangaChapterByParam = async (req, res) => {
     },
   });
 
-  c.queue(`${process.env.KOMIKU_LINK}ch/${param}`);
+  c.queue(`https://komiku.id/ch/${param}`);
 };
