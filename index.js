@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
         "/api/dorama": "Mendapatkan data dari website doramaindo",
         "/api/komikcast": "Mendapatkan data dari website komikcast",
         "/api/komiku": "Mendapatkan data dari website komiku",
+        "/api/buku": "Mendapatkan data dari website buku",
       },
       repository: "https://github.com/zaaii/wibuscrap",
       social: {
@@ -28,7 +29,14 @@ app.get("/", (req, res) => {
       },
     });
   });
+app.get("*", (req, res) => {
+    res.status(404).json({
+      error: "404 Not Found",
+    });
+  });
   
+/// Use Libgen route  
+app.use("/api/buku/", require("./routes/libgen-routes.ts"));
 
 /// Use Komiku route
 app.use("/api/komiku/", require("./routes/komiku-route.js"));
