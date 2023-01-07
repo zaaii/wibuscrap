@@ -11,7 +11,7 @@ app.use(morgan("dev"));
 app.set("json spaces", 2);
 app.use(express.json());
 
-app.get("*", (req, res) => {
+app.get("/", (req, res) => {
     res.status(200).json({
       api_name: "Wibu Scrapper",
       end_points: {
