@@ -94,7 +94,7 @@ module.exports.getLatestManga = async (req, res) => {
               ? prevLink
                   // .replace("/rekomendasi/", "")
                   // .replace("other", "")
-                  .replace("/pustaka/", "")
+                  .replace("pustaka/", "")
                   .replace("page/", "")
                   .replace("/", "")
               : null;
@@ -103,7 +103,7 @@ module.exports.getLatestManga = async (req, res) => {
               ? nextLink
                   // .replace("/rekomendasi/", "")
                   // .replace("other", "")
-                  .replace("/pustaka/", "")
+                  .replace("pustaka/", "")
                   .replace("page/", "")
                   .replace("/", "")
               : null;
