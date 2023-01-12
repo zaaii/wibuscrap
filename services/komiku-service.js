@@ -10,7 +10,7 @@ module.exports.getLatestManga = async (req, res) => {
     rateLimit: 1000,
     maxConnections: 1,
     referer: "https://komiku.id/",
-    // This will be called for each crawled page
+
     callback: function (error, result, done) {
       const mangaList = [];
       if (error) {
@@ -92,16 +92,18 @@ module.exports.getLatestManga = async (req, res) => {
           prev =
             prevLink != undefined
               ? prevLink
-                  .replace("/rekomendasi/", "")
-                  .replace("other", "")
+                  // .replace("/rekomendasi/", "")
+                  // .replace("other", "")
+                  .replace("/pustaka/","")
                   .replace("page/", "")
                   .replace("/", "")
               : null;
           next =
             nextLink != undefined
               ? nextLink
-                  .replace("/rekomendasi/", "")
-                  .replace("other", "")
+                  // .replace("/rekomendasi/", "")
+                  // .replace("other", "")
+                  .replace("/pustaka/","")
                   .replace("page/", "")
                   .replace("/", "")
               : null;
@@ -128,9 +130,11 @@ module.exports.getLatestManga = async (req, res) => {
       );
     }
   } else if (page === 1) {
-    c.queue(`https://data.komiku.id/other/rekomendasi/`);
+    c.queue(`https://data.komiku.id/pustaka/`);
+    // c.queue(`https://data.komiku.id/other/rekomendasi/`);
   } else {
-    c.queue(`https://data.komiku.id/other/rekomendasi/page/${page}/`);
+    c.queue(`https://data.komiku.id/pustaka/page/${page}/`);
+    // c.queue(`https://data.komiku.id/other/rekomendasi/page/${page}/`);
   }
 };
 
