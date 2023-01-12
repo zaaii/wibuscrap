@@ -225,14 +225,16 @@ module.exports.getNewManga = async (req, res) => {
           prev =
             prevLink != undefined
               ? prevLink
-                  .replace("pustaka/", "")
+                  .replace("/hot/", "")
+                  .replace("other", "")
                   .replace("page/", "")
                   .replace("/", "")
               : null;
           next =
             nextLink != undefined
               ? nextLink
-                  .replace("pustaka/", "")
+                  .replace("/hot/", "")
+                  .replace("other", "")
                   .replace("page/", "")
                   .replace("/", "")
               : null;
@@ -259,9 +261,9 @@ module.exports.getNewManga = async (req, res) => {
       );
     }
   } else if (page === 1) {
-    c.queue(`https://data.komiku.id/pustaka/?orderby=date`);
+    c.queue(`https://data.komiku.id/other/hot/`);
   } else {
-    c.queue(`https://data.komiku.id/pustaka/page/${page}/?orderby=date`);
+    c.queue(`https://data.komiku.id/other/hot/page/${page}/`);
   }
 };
 
