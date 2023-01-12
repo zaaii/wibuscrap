@@ -259,9 +259,9 @@ module.exports.getNewManga = async (req, res) => {
       );
     }
   } else if (page === 1) {
-    c.queue(`https://data.komiku.id/pustaka/`);
+    c.queue(`https://data.komiku.id/pustaka/?orderby=date`);
   } else {
-    c.queue(`https://data.komiku.id/pustaka/page/${page}/`);
+    c.queue(`https://data.komiku.id/pustaka/page/${page}/?orderby=date`);
   }
 };
 
