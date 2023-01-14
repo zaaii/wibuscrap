@@ -287,6 +287,7 @@ module.exports.getMangaByParam = async (req, res) => {
 
         const mangaTitle = $("#Judul h1").text().trim();
         const mangaThumbnail = $(".ims img").attr("src");
+        const mangaCreator = $(".inftable").attr("creator").text().trim();
         const mangaGenre = [];
         const mangaSynopsis = $("#Judul").find(".desc").text().trim();
         const mangaChapters = [];
@@ -323,6 +324,7 @@ module.exports.getMangaByParam = async (req, res) => {
           data: {
             title: trimmedTitle,
             thumbnail: mangaThumbnail.split("?")[0],
+            creator: mangaCreator,
             genre: mangaGenre,
             synopsis: mangaSynopsis,
             chapters: mangaChapters,
