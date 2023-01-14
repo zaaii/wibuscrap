@@ -287,7 +287,7 @@ module.exports.getMangaByParam = async (req, res) => {
 
         const mangaTitle = $("#Judul h1").text().trim();
         const mangaThumbnail = $(".ims img").attr("src");
-        const mangaCreator = $("#Informasi > table > tbody > tr:nth-child(4) > td:nth-child(2)")
+        const mangaCreator = $("#Informasi > table > tbody > tr:nth-child(3) > td:nth-child(1)")
         .text()
         .trim();
         const mangaGenre = [];
