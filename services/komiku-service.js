@@ -366,9 +366,7 @@ module.exports.getMangaChapterByParam = async (req, res) => {
       }
 
       res.json({
-        data: {
-          images: chapterImages,
-        }
+        data: chapterImages,
       });
 
       done();
