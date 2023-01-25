@@ -355,7 +355,7 @@ module.exports.getMangaByGenre = async (req, res) => {
               .replace("/page/", "")
               .replace("/?post_type=manga", "");
 
-            next = `${pageKeyword}`;
+            next = ``;
           }
         } else {
           prev =
