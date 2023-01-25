@@ -137,7 +137,7 @@ module.exports.getRekomenManga = async (req, res) => {
 module.exports.getHotManga = async (req, res) => {
   const page = req.query.page || 1;
   const keyword = req.query.s;
-  const url = req.protocol + "://" + req.get("host");
+  const url = req.protocol + "://" + req.get("host") + req.baseUrl + "/hot";
 
   var c = new Crawler({
     rateLimit: 1000,
@@ -271,7 +271,7 @@ module.exports.getMangaByGenre = async (req, res) => {
   const page = req.query.page || 1;
   const keyword = req.query.s;
   const { param } = req.params;
-  const url = req.protocol + "://" + req.get("host") + req.baseUrl;
+  const url = req.protocol + "://" + req.get("host") + req.baseUrl + "/genre";
 
   var c = new Crawler({
     rateLimit: 1000,
