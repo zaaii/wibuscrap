@@ -137,7 +137,7 @@ module.exports.getRekomenManga = async (req, res) => {
 module.exports.getHotManga = async (req, res) => {
   const page = req.query.page || 1;
   const keyword = req.query.s;
-  const urls = req.protocol + "://" + req.get("host") + req.baseUrl
+  const urls = req.protocol + "://" + req.get("host") + req.baseUrl;
   const url = req.protocol + "://" + req.get("host") + req.baseUrl + "/hot";
 
   var c = new Crawler({
@@ -272,8 +272,8 @@ module.exports.getMangaByGenre = async (req, res) => {
   const page = req.query.page || 1;
   const keyword = req.query.s;
   const { param } = req.params;
-  const urls = req.protocol + "://" + req.get("host") + req.baseUrl
-  const url = req.protocol + "://" + req.get("host") + req.baseUrl + "/genre";
+  const urls = req.protocol + "://" + req.get("host") + req.baseUrl;
+  const url = req.protocol + "://" + req.get("host") + req.baseUrl + "/genre" + param;
 
   var c = new Crawler({
     rateLimit: 1000,
@@ -361,15 +361,16 @@ module.exports.getMangaByGenre = async (req, res) => {
           prev =
             prevLink != undefined
               ? prevLink
-                  .replace("/hot/", "")
+                  .replace("/page/", "")
+                  .replace("/", "")
                   .replace("other", "")
                   .replace("?genre2=", "")
-                  .replace("page/", "")
-                  .replace("/", "")
+                  .replace("/hot", "")
+                  .replace(`/${param}`, "")
               : null;
           next =
             nextLink != undefined
-              ? `https://wibutools.live/api/komiku/genre/${param}?page=` + nextLink
+              ?  nextLink
                   .replace("/page/", "")
                   .replace("/", "")
                   .replace("other", "")
@@ -382,8 +383,8 @@ module.exports.getMangaByGenre = async (req, res) => {
         console.log(result.request.uri.href);
 
         return res.json({
-          next_page: nextLink != undefined ? `${next}` : null,
-          prev_page: prevLink != undefined ? `${url}?page=${prev}` : null,
+          next_page: nextLink != undefined ? `${url}${next}` : null,
+          prev_page: prevLink != undefined ? `${url}${prev}` : null,
           data: mangaList,
         });
       }
