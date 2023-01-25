@@ -379,8 +379,8 @@ module.exports.getMangaByGenre = async (req, res) => {
         console.log(result.request.uri.href);
 
         return res.json({
-          next_page: nextLink != undefined ? `${url}?page=${next}` : null,
-          prev_page: prevLink != undefined ? `${url}?page=${prev}` : null,
+          next_page: nextLink != undefined ? `${url}${next}?page=` : null,
+          prev_page: prevLink != undefined ? `${url}${prev}?page=` : null,
           data: mangaList,
         });
       }
