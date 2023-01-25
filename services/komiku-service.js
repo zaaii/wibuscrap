@@ -137,6 +137,7 @@ module.exports.getRekomenManga = async (req, res) => {
 module.exports.getHotManga = async (req, res) => {
   const page = req.query.page || 1;
   const keyword = req.query.s;
+  const urls = req.protocol + "://" + req.get("host") + req.baseUrl
   const url = req.protocol + "://" + req.get("host") + req.baseUrl + "/hot";
 
   var c = new Crawler({
@@ -192,7 +193,7 @@ module.exports.getHotManga = async (req, res) => {
               latest_chapter: latestChapter,
               thumbnail: mangaThumbnail.split("?")[0],
               param: mangaParam,
-              detail_url: `${url}/${mangaParam}`,
+              detail_url: `${urls}/${mangaParam}`,
             });
           });
 
@@ -271,6 +272,7 @@ module.exports.getMangaByGenre = async (req, res) => {
   const page = req.query.page || 1;
   const keyword = req.query.s;
   const { param } = req.params;
+  const urls = req.protocol + "://" + req.get("host") + req.baseUrl
   const url = req.protocol + "://" + req.get("host") + req.baseUrl + "/genre";
 
   var c = new Crawler({
@@ -326,7 +328,7 @@ module.exports.getMangaByGenre = async (req, res) => {
               latest_chapter: latestChapter,
               thumbnail: mangaThumbnail.split("?")[0],
               param: mangaParam,
-              detail_url: `${url}/${mangaParam}`,
+              detail_url: `${urls}/${mangaParam}`,
             });
           });
 
@@ -379,8 +381,8 @@ module.exports.getMangaByGenre = async (req, res) => {
         console.log(result.request.uri.href);
 
         return res.json({
-          next_page: nextLink != undefined ? `${url}?page=${next}` : null,
-          prev_page: prevLink != undefined ? `${url}?page=${prev}` : null,
+          next_page: nextLink != undefined ? `${url}/${next}` : null,
+          prev_page: prevLink != undefined ? `${url}/${prev}` : null,
           data: mangaList,
         });
       }
