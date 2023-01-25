@@ -375,6 +375,7 @@ module.exports.getMangaByGenre = async (req, res) => {
                   .replace("other", "")
                   .replace("?genre2=", "")
                   .replace("/hot", "")
+                  .replace(`/${param}`, "")
               : null;
         }
 
