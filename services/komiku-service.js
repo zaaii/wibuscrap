@@ -369,7 +369,7 @@ module.exports.getMangaByGenre = async (req, res) => {
               : null;
           next =
             nextLink != undefined
-              ? nextLink
+              ? `https://wibutools.live/api/komiku/genre/${param}?page=` + nextLink
                   .replace("/hot/", "")
                   .replace("other", "")
                   .replace("?genre2=", "")
