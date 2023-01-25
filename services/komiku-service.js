@@ -273,7 +273,7 @@ module.exports.getMangaByGenre = async (req, res) => {
   const keyword = req.query.s;
   const { param } = req.params;
   const urls = req.protocol + "://" + req.get("host") + req.baseUrl;
-  const url = req.protocol + "://" + req.get("host") + req.baseUrl + "/genre" + param;
+  const url = req.protocol + "://" + req.get("host") + req.baseUrl + "/genre/" + param;
 
   var c = new Crawler({
     rateLimit: 1000,
@@ -383,8 +383,8 @@ module.exports.getMangaByGenre = async (req, res) => {
         console.log(result.request.uri.href);
 
         return res.json({
-          next_page: nextLink != undefined ? `${url}${next}` : null,
-          prev_page: prevLink != undefined ? `${url}${prev}` : null,
+          next_page: nextLink != undefined ? `${url}?page=${next}` : null,
+          prev_page: prevLink != undefined ? `${url}?page=${prev}` : null,
           data: mangaList,
         });
       }
