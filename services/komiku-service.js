@@ -360,8 +360,8 @@ module.exports.getMangaByGenre = async (req, res) => {
             prevLink != undefined
               ? prevLink
                   .replace("/hot/", "")
-                  .replace("?genre2=", "")
                   .replace("other", "")
+                  .replace("?genre2=", "")
                   .replace("page/", "")
                   .replace("/", "")
               : null;
@@ -369,8 +369,8 @@ module.exports.getMangaByGenre = async (req, res) => {
             nextLink != undefined
               ? nextLink
                   .replace("/hot/", "")
-                  .replace("?genre2=", "")
                   .replace("other", "")
+                  .replace("?genre2=", "")
                   .replace("page/", "")
                   .replace("/", "")
               : null;
