@@ -357,16 +357,16 @@ module.exports.getHotManga = async (req, res) => {
 
   if (keyword) {
     if (page === 1) {
-      c.queue(`https://data.komiku.id/cari/?post_type=manga&s=${keyword}`);
+      c.queue(`https://api.komiku.id/cari/?post_type=manga&s=${keyword}`);
     } else {
       c.queue(
-        `https://data.komiku.id/page/${page}/?post_type=manga&s=${keyword}`
+        `https://api.komiku.id/page/${page}/?post_type=manga&s=${keyword}`
       );
     }
   } else if (page === 1) {
-    c.queue(`https://data.komiku.id/other/hot/`);
+    c.queue(`https://api.komiku.id/other/hot/`);
   } else {
-    c.queue(`https://data.komiku.id/other/hot/page/${page}/`);
+    c.queue(`https://api.komiku.id/other/hot/page/${page}/`);
   }
 };
 
