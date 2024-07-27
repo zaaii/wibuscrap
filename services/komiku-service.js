@@ -251,103 +251,50 @@ module.exports.getHotManga = async (req, res) => {
       const mangaList = [];
       if (error) {
         console.log(error);
-        res.json(error);
+        return res.json({ error: error.message });
       } else {
         var $ = result.$;
 
-        const mangaCount = $(".daftar").find(".bge").length;
+        $(".daftar").find(".bge").each((i, el) => {
+          const mangaTitle = $(el).find(".kan").find("h3").text().trim();
+          const mangaDescription = $(el).find(".kan").find("p").text().trim().replace(/\s+/g, " ");
+          const mangaThumbnail = $(el).find(".bgei").find("img").data("src") || $(el).find(".bgei").find("img").attr("src");
+          const mangaParam = $(el).find(".kan").find("a").eq(0).attr("href")?.split("/")[4] || "";
+          const latestChapter = $(el).find(".kan").find(".new1").last().find("span").last().text().trim();
 
-        console.log(mangaCount);
-
-        $(".daftar")
-          .find(".bge")
-          .each((i, el) => {
-            const mangaTitle = $(el).find(".kan").find("h3").text();
-            const mangaDescription = $(el).find(".kan").find("p").text();
-            const mangaThumbnail = $(el).find(".bgei").find("img").data("src");
-            const mangaParam = $(el)
-              .find(".kan")
-              .find("a")
-              .eq(0)
-              .attr("href")
-              .split("/")[4];
-            const latestChapter = $(el)
-              .find(".kan")
-              .find(".new1")
-              .last()
-              .find("span")
-              .last()
-              .text();
-
-            let trimmedTitle = mangaTitle;
-            if (mangaTitle) {
-              trimmedTitle = mangaTitle.trim();
-            }
-
-            let trimmedDescription = mangaDescription;
-            if (mangaDescription) {
-              trimmedDescription = mangaDescription.trim().replace("  ", " ");
-            }
-
+          if (mangaTitle && mangaParam) {
             mangaList.push({
-              title: trimmedTitle,
-              description: trimmedDescription,
+              title: mangaTitle,
+              description: mangaDescription,
               latest_chapter: latestChapter,
-              thumbnail: mangaThumbnail.split("?")[0],
+              thumbnail: mangaThumbnail ? mangaThumbnail.split("?")[0] : "",
               param: mangaParam,
               detail_url: `${urls}/${mangaParam}`,
             });
-          });
+          }
+        });
 
         let prevLink = $(".loop-nav-inner").find(".prev").attr("href");
         let nextLink = $(".loop-nav-inner").find(".next").attr("href");
 
-        let prev = "";
-        let next = "";
+        let prev = null;
+        let next = null;
+
         if (keyword) {
-          if (prevLink != undefined && prevLink.includes("page")) {
-            let pageKeyword = prevLink;
-            pageKeyword = pageKeyword
-              .replace("/page/", "")
-              .replace("/?post_type=manga", "");
-
-            prev = `${pageKeyword}`;
-          } else {
-            prev = `1&s=${keyword}`;
+          if (prevLink && prevLink.includes("page")) {
+            prev = prevLink.match(/\/page\/(\d+)/)[1] + `&s=${keyword}`;
           }
-
-          if (nextLink != undefined) {
-            let pageKeyword = nextLink;
-            pageKeyword = pageKeyword
-              .replace("/page/", "")
-              .replace("/?post_type=manga", "");
-
-            next = `${pageKeyword}`;
+          if (nextLink) {
+            next = nextLink.match(/\/page\/(\d+)/)[1] + `&s=${keyword}`;
           }
         } else {
-          prev =
-            prevLink != undefined
-              ? prevLink
-                  .replace("/hot/", "")
-                  .replace("other", "")
-                  .replace("page/", "")
-                  .replace("/", "")
-              : null;
-          next =
-            nextLink != undefined
-              ? nextLink
-                  .replace("/hot/", "")
-                  .replace("other", "")
-                  .replace("page/", "")
-                  .replace("/", "")
-              : null;
+          prev = prevLink ? prevLink.match(/\/page\/(\d+)/)?.[1] : null;
+          next = nextLink ? nextLink.match(/\/page\/(\d+)/)?.[1] : null;
         }
 
-        console.log(result.request.uri.href);
-
         return res.json({
-          next_page: nextLink != undefined ? `${url}?page=${next}` : null,
-          prev_page: prevLink != undefined ? `${url}?page=${prev}` : null,
+          next_page: next ? `${url}?page=${next}` : null,
+          prev_page: prev ? `${url}?page=${prev}` : null,
           data: mangaList,
         });
       }
@@ -355,19 +302,18 @@ module.exports.getHotManga = async (req, res) => {
     },
   });
 
+  let scrapingUrl;
   if (keyword) {
-    if (page === 1) {
-      c.queue(`https://api.komiku.id/cari/?post_type=manga&s=${keyword}`);
-    } else {
-      c.queue(
-        `https://api.komiku.id/page/${page}/?post_type=manga&s=${keyword}`
-      );
-    }
-  } else if (page === 1) {
-    c.queue(`https://api.komiku.id/other/hot/`);
+    scrapingUrl = page === 1
+      ? `https://api.komiku.id/cari/?post_type=manga&s=${keyword}`
+      : `https://api.komiku.id/page/${page}/?post_type=manga&s=${keyword}`;
   } else {
-    c.queue(`https://api.komiku.id/other/hot/page/${page}/`);
+    scrapingUrl = page === 1
+      ? `https://api.komiku.id/other/hot/`
+      : `https://api.komiku.id/other/hot/page/${page}/`;
   }
+
+  c.queue(scrapingUrl);
 };
 
 module.exports.getMangaByParamBatch = async (req, res) => {
