@@ -8,7 +8,7 @@ module.exports.getLatestManga = async (req, res) => {
   var c = new Crawler({
     rateLimit: 1000,
     maxConnections: 1,
-    referer: "https://komikcast.site/",
+    referer: "https://komikcast.cz/",
     // This will be called for each crawled page
     callback: function (error, result, done) {
       const mangaList = [];
