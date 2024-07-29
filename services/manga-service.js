@@ -73,10 +73,10 @@ module.exports.getLatestManga = async (req, res) => {
   });
 
   if (keyword) {
-    c.queue(`${process.env.KOMIKCAST_LINK}page/${page}/?s=${keyword}`);
+    c.queue(`https://komikcast.cz/page/${page}/?s=${keyword}`);
   } else {
     c.queue(
-      `${process.env.KOMIKCAST_LINK}daftar-komik/page/${page}/?sortby=update&type=manga`
+      `https://komikcast.cz/daftar-komik/page/${page}/?sortby=update&type=manga`
     );
   }
 };
@@ -87,7 +87,7 @@ module.exports.getMangaByParam = async (req, res) => {
 
   const c = new Crawler({
     maxConnections: 16,
-    referer: "https://komikcast.site/",
+    referer: "https://komikcast.cz/",
     // This will be called for each crawled page
     callback: (error, result, done) => {
       if (error) {
@@ -158,7 +158,7 @@ module.exports.getMangaByParam = async (req, res) => {
     },
   });
 
-  c.queue(`${process.env.KOMIKCAST_LINK}manga/${param}`);
+  c.queue(`https://komikcast.cz/manga/${param}`);
 };
 
 module.exports.getMangaChapterByParam = async (req, res) => {
@@ -167,7 +167,7 @@ module.exports.getMangaChapterByParam = async (req, res) => {
 
   const c = new Crawler({
     maxConnections: 16,
-    referer: `${process.env.KOMIKCAST_LINK}`,
+    referer: `https://komikcast.cz/`,
     // This will be called for each crawled page
     callback: (error, result, done) => {
       if (error) {
@@ -196,5 +196,5 @@ module.exports.getMangaChapterByParam = async (req, res) => {
     },
   });
 
-  c.queue(`${process.env.KOMIKCAST_LINK}chapter/${param}`);
+  c.queue(`https://komikcast.cz/chapter/${param}`);
 };
